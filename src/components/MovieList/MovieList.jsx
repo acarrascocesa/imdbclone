@@ -5,7 +5,7 @@ import Cards from "../Card/Cards"
 
 const MovieList = () => {
     
-    const [movieList, setMovieList] = useState([])
+    const [list, setList] = useState([])
     const {type} = useParams()
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const MovieList = () => {
     const getData = () => {
         fetch(`https://api.themoviedb.org/3/movie/${type ? type : "popular"}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
         .then(res => res.json())
-        .then(data => setMovieList(data.results))
+        .then(data => setList(data.results))
     }
 
     return (
@@ -27,8 +27,8 @@ const MovieList = () => {
             <h2 className="list__title">{(type ? type : "POPULAR").toUpperCase()}</h2>
             <div className="list__cards">
                 {
-                    movieList.map((movie, index) => (
-                        <Cards key={movie.id} movie={movie} />
+                    list.map((movie, index) => (
+                        <Cards key={index} movie={movie} />
                     ))
                 }
             </div>
